@@ -22,7 +22,7 @@ public class Client {
                 System.out.print("input> ");
                 String message = scanner.nextLine();
                 dataOutputStream.writeUTF(message);
-                System.out.println(dataInputStream.readUTF());
+
                 if(message.equalsIgnoreCase("exit()"))
                     break;
             }

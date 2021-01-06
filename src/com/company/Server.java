@@ -4,10 +4,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Server {
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
+    private Set<UserThread> userThreadSet= new HashSet<>();
     private int portNumber;
 
     public Server(int portNumber){
@@ -32,6 +35,13 @@ public class Server {
 
         } catch (Exception e){
             System.out.println(e.toString());
+        }
+    }
+    void broadcast(String message, UserThread excludeUser) {
+        for (UserThread aUser : userThreadSet) {
+            if (aUser != excludeUser) {
+                aUser.sendMessage(message);
+            }
         }
     }
 }
